@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make Your TED Talk KILLER 🎤</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E8150D;
+    --red-dark: #b01009;
+    --blue: #1A6EFF;
+    --blue-dark: #1254cc;
+    --white: #F7F2E8;
+    --bg: #F2ECD9;
+    --card-bg: #FAF6EE;
+    --card-border: #DDD5C0;
+    --text: #1A1A2E;
+    --muted: #8a7f6a;
+    --green: #1aaa55;
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+ 
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 30%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(232,21,13,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 70%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(26,110,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  /* HERO */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 70px 24px 50px;
+    z-index: 1;
+  }
+ 
+  .ted-badge {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    animation: fadeDown 0.6s ease both;
+  }
+ 
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 14vw, 9rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+    animation: fadeDown 0.7s ease 0.1s both;
+  }
+ 
+  .hero h1 span {
+    color: var(--red);
+    display: block;
+    font-size: clamp(4.5rem, 17vw, 11rem);
+    text-shadow: 0 0 60px rgba(255,31,31,0.5), 0 0 120px rgba(26,110,255,0.25), 0 4px 30px rgba(0,0,0,0.5);
+    letter-spacing: 4px;
+  }
+ 
+  .hero p {
+    margin: 20px auto 0;
+    max-width: 560px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.7;
+    animation: fadeDown 0.7s ease 0.2s both;
+  }
+ 
+  .progress-bar-wrap {
+    max-width: 500px;
+    margin: 32px auto 0;
+    animation: fadeDown 0.7s ease 0.3s both;
+  }
+ 
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+ 
+  .progress-track {
+    height: 6px;
+    background: #DDD5C0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+ 
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--blue));
+    border-radius: 99px;
+    transition: width 0.6s ease;
+    width: 0%;
+  }
+ 
+  /* SECTION TITLE */
+  .section-title {
+    text-align: center;
+    padding: 10px 24px 8px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .section-title h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
+ 
+  .section-title p {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+ 
+  /* LESSON CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .lesson-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeUp 0.6s ease both;
+  }
+ 
+  .lesson-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--red);
+    box-shadow: 0 12px 40px rgba(26,110,255,0.18);
+  }
+ 
+  .lesson-card.done {
+    border-color: var(--green);
+  }
+ 
+  .lesson-card.done .card-header {
+    background: rgba(62,207,106,0.08);
+  }
+ 
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px;
+    background: rgba(0,0,0,0.02);
+  }
+ 
+  .card-emoji {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(26,110,255,0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+ 
+  .lesson-card:hover .card-emoji {
+    transform: scale(1.15) rotate(-5deg);
+  }
+ 
+  .card-title-wrap h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+  }
+ 
+  .card-title-wrap p {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+ 
+  .card-chevron {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+  }
+ 
+  .lesson-card.open .card-chevron {
+    transform: rotate(180deg);
+    color: var(--red);
+  }
+ 
+  .card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 22px;
+  }
+ 
+  .lesson-card.open .card-body {
+    max-height: 800px;
+    padding: 0 22px 22px;
+  }
+ 
+  .card-divider {
+    height: 1px;
+    background: var(--card-border);
+    margin-bottom: 18px;
+  }
+ 
+  .what-block {
+    background: rgba(26,110,255,0.07);
+    border-left: 3px solid var(--blue);
+    padding: 12px 14px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.6;
+  }
+ 
+  .steps-list {
+    list-style: none;
+    margin-bottom: 14px;
+  }
+ 
+  .steps-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.5;
+  }
+ 
+  .step-num {
+    background: var(--red);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+ 
+  .example-phrase {
+    background: #EDE8DC;
+    border: 1px solid #D5CCBA;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--blue-dark);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+ 
+  .example-phrase::before {
+    content: '💬 Example: ';
+    font-style: normal;
+    font-weight: 600;
+    color: var(--blue);
+  }
+ 
+  .mark-done-btn {
+    background: none;
+    border: 1px solid var(--green);
+    color: var(--green);
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+ 
+  .mark-done-btn:hover { background: rgba(62,207,106,0.1); }
+ 
+  .lesson-card.done .mark-done-btn {
+    background: rgba(62,207,106,0.15);
+  }
+ 
+  /* HOOK PICKER */
+  .hook-section {
+    max-width: 860px;
+    margin: 48px auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .hook-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+ 
+  .hook-section > p {
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+ 
+  .hook-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+ 
+  .hook-tab {
+    background: #EDE8DC;
+    border: 1px solid #D5CCBA;
+    border-radius: 99px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+ 
+  .hook-tab:hover, .hook-tab.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+    font-weight: 600;
+  }
+ 
+  .hook-preview {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px;
+    min-height: 160px;
+    transition: all 0.3s ease;
+  }
+ 
+  .hook-preview h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+ 
+  .hook-preview p {
+    color: #444;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+ 
+  .hook-example-box {
+    background: rgba(26,110,255,0.06);
+    border-left: 3px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    color: var(--blue-dark);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+ 
+  /* TALK PLANNER */
+  .planner-section {
+    max-width: 860px;
+    margin: 48px auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .planner-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+ 
+  .planner-section > p {
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+ 
+  .planner-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+ 
+  .planner-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+ 
+  .planner-card > p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+ 
+  .planner-card textarea, .planner-card input {
+    width: 100%;
+    background: #EDE8DC;
+    border: 1px solid #D5CCBA;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+ 
+  .planner-card textarea:focus, .planner-card input:focus {
+    border-color: var(--blue);
+  }
+ 
+  .planner-card textarea::placeholder, .planner-card input::placeholder {
+    color: #aaa08a;
+  }
+ 
+  /* CHECKLIST */
+  .checklist-section {
+    max-width: 860px;
+    margin: 48px auto 60px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .checklist-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+ 
+  .checklist-section > p {
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+ 
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+ 
+  @media (max-width: 600px) {
+    .checklist-grid { grid-template-columns: 1fr; }
+  }
+ 
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+ 
+  .check-item:hover { border-color: #C0B89E; }
+ 
+  .check-item.checked {
+    border-color: var(--green);
+    background: rgba(26,170,85,0.06);
+  }
+ 
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #C0B89E;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    margin-top: 1px;
+    font-size: 0.8rem;
+  }
+ 
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+  }
+ 
+  .check-item .check-text {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.5;
+  }
+ 
+  .check-item.checked .check-text {
+    color: var(--text);
+    font-weight: 500;
+  }
+ 
+  /* SCORE */
+  .score-display {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+  }
+ 
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: conic-gradient(var(--red) 0deg, #DDD5C0 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    position: relative;
+    transition: background 0.5s ease;
+  }
+ 
+  .score-inner {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+ 
+  .score-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1;
+  }
+ 
+  .score-label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+ 
+  .score-message {
+    font-size: 1.05rem;
+    color: #555;
+    margin-top: 8px;
+  }
+ 
+  /* DIVIDER */
+  .wave-divider {
+    max-width: 860px;
+    margin: 12px auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .wave-divider::before, .wave-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D5CCBA, transparent);
+  }
+ 
+  .wave-divider span {
+    color: var(--red);
+    font-size: 1.2rem;
+  }
+ 
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: #aaa08a;
+    font-size: 0.78rem;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid #DDD5C0;
+    margin-top: 20px;
+  }
+ 
+  /* CONFETTI */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    border-radius: 2px;
+    animation: confettiFall 3s ease forwards;
+    pointer-events: none;
+    z-index: 9999;
+  }
+ 
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+  }
+ 
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+ 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+ 
+  .lesson-card:nth-child(1) { animation-delay: 0.05s; }
+  .lesson-card:nth-child(2) { animation-delay: 0.1s; }
+  .lesson-card:nth-child(3) { animation-delay: 0.15s; }
+  .lesson-card:nth-child(4) { animation-delay: 0.2s; }
+  .lesson-card:nth-child(5) { animation-delay: 0.25s; }
+  .lesson-card:nth-child(6) { animation-delay: 0.3s; }
+  .lesson-card:nth-child(7) { animation-delay: 0.35s; }
+ 
+  /* TAG */
+  .tag {
+    display: inline-block;
+    background: rgba(230,43,30,0.15);
+    color: var(--red);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-bottom: 8px;
+  }
+ 
+  /* PRINT / SAVE AREA */
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+ 
+  .action-btn {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 99px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+ 
+  .action-btn:hover { background: var(--red-dark); transform: scale(1.03); }
+ 
+  .action-btn.secondary {
+    background: transparent;
+    border: 1px solid #444;
+    color: #bbb;
+  }
+ 
+  .action-btn.secondary:hover { background: #222; transform: scale(1.03); }
+</style>
+</head>
+<body>
+ 
+<!-- HERO -->
+<div class="hero">
+  <div class="ted-badge">🎤 TED Talk Masterclass</div>
+  <h1>Make Your Talk<span>A &nbsp;KILLER.</span></h1>
+  <p>7 powerful strategies every great TED speaker uses — and how you can use them too.</p>
+ 
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>Your progress</span>
+      <span id="progressText">0 / 7 lessons read</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+</div>
+ 
+<!-- LESSONS -->
+<div class="section-title">
+  <div class="tag">Part 1</div>
+  <h2>The 7 Secrets</h2>
+  <p>Click each card to learn the secret — then mark it done!</p>
+</div>
+ 
+<div class="cards-grid" id="cardsGrid">
+ 
+  <!-- CARD 1 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">🎯</div>
+      <div class="card-title-wrap">
+        <h3>One Big Idea</h3>
+        <p>The secret of focus</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        A TED Talk is NOT a report. It has ONE central idea — one message you want the audience to remember forever. Everything you say must support that one idea.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span>Write your one idea in ONE sentence.</span></li>
+        <li><div class="step-num">2</div><span>Check every part of your talk: does it support this idea? If not, cut it.</span></li>
+        <li><div class="step-num">3</div><span>Say your idea clearly at least once during your talk.</span></li>
+      </ul>
+      <div class="example-phrase">
+        "Technology is changing the way we communicate — and that's actually making us lonelier."
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+  <!-- CARD 2 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">🪝</div>
+      <div class="card-title-wrap">
+        <h3>The Hook</h3>
+        <p>Grab them in 60 seconds</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        You have 60 seconds to make the audience want to listen. Never start with "Good morning, my name is..." — that wastes your most powerful moment.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span>Choose a hook type: story, shocking fact, question, or bold statement.</span></li>
+        <li><div class="step-num">2</div><span>Write your opening 3–5 sentences. Make them dramatic!</span></li>
+        <li><div class="step-num">3</div><span>Practise your opening until it sounds totally natural.</span></li>
+      </ul>
+      <div class="example-phrase">
+        "Three years ago, I nearly died. And in that moment, I understood something that changed my life completely."
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+  <!-- CARD 3 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">📖</div>
+      <div class="card-title-wrap">
+        <h3>Tell a Story</h3>
+        <p>Facts tell, stories sell</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        Data is forgettable. Stories are unforgettable. TED speakers use personal stories, real examples, and vivid scenes to make their ideas stick in the audience's brain.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span>Find a personal story that connects to your big idea.</span></li>
+        <li><div class="step-num">2</div><span>Use this pattern: <strong>Problem → Struggle → Solution/Lesson</strong></span></li>
+        <li><div class="step-num">3</div><span>Add details: describe what you saw, heard, or felt. Make it real.</span></li>
+      </ul>
+      <div class="example-phrase">
+        "I remember standing in the hospital corridor, the fluorescent lights humming above me, thinking..."
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+  <!-- CARD 4 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">🗣️</div>
+      <div class="card-title-wrap">
+        <h3>Your Voice</h3>
+        <p>Pace, pause & power</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        Your voice is your most powerful tool. Most students speak too fast when nervous. TED speakers slow down, vary their speed, and use silence as a weapon.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span><strong>Slow down</strong> for important ideas. Speed up for exciting parts.</span></li>
+        <li><div class="step-num">2</div><span><strong>Pause</strong> for 2–3 seconds after your most important sentence. Let it land.</span></li>
+        <li><div class="step-num">3</div><span><strong>Record yourself</strong> and listen back. Are you monotone? Vary your tone.</span></li>
+      </ul>
+      <div class="example-phrase">
+        "And then — [pause] — everything changed." 
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+  <!-- CARD 5 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">🚶</div>
+      <div class="card-title-wrap">
+        <h3>Own the Stage</h3>
+        <p>Body language = confidence</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        55% of your message comes from your body language. TED speakers stand open, move with purpose, and use eye contact to connect with every person in the room.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span><strong>Stand open:</strong> no crossing arms, no hiding behind a podium.</span></li>
+        <li><div class="step-num">2</div><span><strong>Move with purpose:</strong> step forward to make a key point, step back to pause.</span></li>
+        <li><div class="step-num">3</div><span><strong>Eye contact:</strong> look at one person for 2–3 seconds, then move to another.</span></li>
+      </ul>
+      <div class="example-phrase">
+        Hold eye contact when you say your most important line — don't look at your notes.
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+  <!-- CARD 6 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">🔁</div>
+      <div class="card-title-wrap">
+        <h3>Rule of Three</h3>
+        <p>Make it memorable</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        Humans naturally remember things in groups of three. TED speakers always cluster their points in threes. It sounds more professional, more confident, and is easier to remember.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span>Organise your talk into <strong>3 main points</strong> — not 2, not 5.</span></li>
+        <li><div class="step-num">2</div><span>Signal it clearly: <strong>"First... Second... And finally..."</strong></span></li>
+        <li><div class="step-num">3</div><span>Use three-word phrases for extra impact.</span></li>
+      </ul>
+      <div class="example-phrase">
+        "It is fast, it is free, and it is changing the world."
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+  <!-- CARD 7 -->
+  <div class="lesson-card" onclick="toggleCard(this)">
+    <div class="card-header">
+      <div class="card-emoji">💥</div>
+      <div class="card-title-wrap">
+        <h3>Killer Ending</h3>
+        <p>End with a BANG</p>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-divider"></div>
+      <div class="what-block">
+        "Thank you for listening" is a weak ending. The last words the audience hears are what they remember most. Go out with a powerful call to action or a full-circle callback to your opening.
+      </div>
+      <ul class="steps-list">
+        <li><div class="step-num">1</div><span><strong>Option A – Call to Action:</strong> tell the audience exactly what you want them to do.</span></li>
+        <li><div class="step-num">2</div><span><strong>Option B – Full Circle:</strong> return to your opening story and show how it ends.</span></li>
+        <li><div class="step-num">3</div><span>Memorise your last two sentences. Never look at your notes for the ending.</span></li>
+      </ul>
+      <div class="example-phrase">
+        "So the next time you pick up your phone, ask yourself: am I connecting — or am I hiding?"
+      </div>
+      <button class="mark-done-btn" onclick="markDone(event, this)">✓ Got it!</button>
+    </div>
+  </div>
+ 
+</div>
+ 
+<!-- HOOK PICKER -->
+<div class="wave-divider"><span>🎤</span></div>
+<div class="hook-section">
+  <div class="tag">Part 2 — Interactive</div>
+  <h2>Choose Your Hook Type</h2>
+  <p>Pick a hook style and see how it works — then try writing your own!</p>
+ 
+  <div class="hook-tabs">
+    <button class="hook-tab active" onclick="showHook('story', this)">📖 Personal Story</button>
+    <button class="hook-tab" onclick="showHook('fact', this)">📊 Shocking Fact</button>
+    <button class="hook-tab" onclick="showHook('question', this)">❓ Bold Question</button>
+    <button class="hook-tab" onclick="showHook('statement', this)">⚡ Bold Statement</button>
+  </div>
+ 
+  <div class="hook-preview" id="hookPreview">
+    <h4>📖 Personal Story Hook</h4>
+    <p>Start with a real moment from your life. Transport the audience to that scene. Make them feel they are there with you. A story instantly builds emotional connection and trust.</p>
+    <div class="hook-example-box">
+      "I was 16 years old, sitting in the back of my father's car, when he said something that completely changed how I see the world..."
+    </div>
+  </div>
+ 
+  <div style="margin-top:16px;">
+    <p style="color:var(--muted); font-size:0.85rem; margin-bottom:8px;">✍️ Now write YOUR opening hook here:</p>
+    <textarea id="myHook" rows="4" style="width:100%;background:#EDE8DC;border:1px solid #D5CCBA;border-radius:10px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;outline:none;line-height:1.6;" placeholder="Write your hook here... Start with a strong first sentence that grabs attention immediately!"></textarea>
+  </div>
+</div>
+ 
+<!-- TALK PLANNER -->
+<div class="wave-divider"><span>📝</span></div>
+<div class="planner-section">
+  <div class="tag">Part 3 — Plan Your Talk</div>
+  <h2>Build Your TED Talk</h2>
+  <p>Fill in the boxes below to plan your own TED-style presentation.</p>
+ 
+  <div class="planner-card">
+    <h4>🎯 My One Big Idea</h4>
+    <p>Write your central message in ONE clear sentence. What is the one thing you want people to remember?</p>
+    <input type="text" placeholder='E.g. "Social media is making teenagers more anxious, not more connected."'>
+  </div>
+ 
+  <div class="planner-card">
+    <h4>🪝 My Opening Hook</h4>
+    <p>Write your first 3 sentences. Don't introduce yourself — start with impact!</p>
+    <textarea rows="3" placeholder="Start with your story, shocking fact, question, or bold statement..."></textarea>
+  </div>
+ 
+  <div class="planner-card">
+    <h4>📖 My Story / Key Example</h4>
+    <p>What personal story or real example will you use to support your idea? Use the Problem → Struggle → Lesson pattern.</p>
+    <textarea rows="4" placeholder="Tell a brief story that supports your big idea. Include real details..."></textarea>
+  </div>
+ 
+  <div class="planner-card">
+    <h4>🔁 My 3 Main Points</h4>
+    <p>Summarise your three key points in one sentence each.</p>
+    <input type="text" placeholder="Point 1: " style="margin-bottom:10px;">
+    <input type="text" placeholder="Point 2: " style="margin-bottom:10px;">
+    <input type="text" placeholder="Point 3: ">
+  </div>
+ 
+  <div class="planner-card">
+    <h4>💥 My Killer Ending</h4>
+    <p>What are your LAST two sentences? Make them powerful. Call to action or full-circle callback?</p>
+    <textarea rows="3" placeholder="End with your strongest moment. The audience will remember your last words..."></textarea>
+  </div>
+ 
+  <div class="action-buttons">
+    <button class="action-btn" onclick="window.print()">🖨️ Print My Plan</button>
+    <button class="action-btn secondary" onclick="clearPlanner()">🗑️ Clear All</button>
+  </div>
+</div>
+ 
+<!-- CHECKLIST -->
+<div class="wave-divider"><span>✅</span></div>
+<div class="checklist-section">
+  <div class="tag">Part 4 — Am I Ready?</div>
+  <h2>TED Talk Readiness Check</h2>
+  <p>Tick everything that applies to your prepared talk. How ready are you?</p>
+ 
+  <div class="checklist-grid" id="checklistGrid">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I can say my ONE big idea in one clear sentence.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">My opening hook does NOT start with "Good morning, my name is..."</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I have a personal story or real example in my talk.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I have organised my talk into 3 clear main points.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I have practised slowing down and using pauses.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I have practised making eye contact with my audience.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">My ending is a strong call to action or full-circle callback.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I have memorised my first and last sentences.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I have recorded myself and listened back at least once.</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div class="check-text">I do NOT read from my notes during the talk.</div>
+    </div>
+  </div>
+ 
+  <div class="score-display">
+    <div class="score-circle" id="scoreCircle">
+      <div class="score-inner">
+        <div class="score-num" id="scoreNum">0</div>
+        <div class="score-label">/ 10</div>
+      </div>
+    </div>
+    <div class="score-message" id="scoreMsg">Tick the boxes above to see your readiness score!</div>
+  </div>
+</div>
+ 
+<footer>
+  🎤 TED Talk Killer — Interactive Lesson &nbsp;|&nbsp; Designed for LSC 1503 — Professional Spoken Communication<br>
+  Material by <strong>N. Motahari</strong> &nbsp;|&nbsp; Higher Colleges of Technology, UAE
+</footer>
+ 
+<script>
+  // --- LESSON CARDS ---
+  let doneLessons = 0;
+ 
+  function toggleCard(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.lesson-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+ 
+  function markDone(e, btn) {
+    e.stopPropagation();
+    const card = btn.closest('.lesson-card');
+    if (!card.classList.contains('done')) {
+      card.classList.add('done');
+      btn.textContent = '✓ Completed!';
+      doneLessons++;
+      updateProgress();
+      if (doneLessons === 7) setTimeout(fireworksEffect, 200);
+    }
+  }
+ 
+  function updateProgress() {
+    const pct = (doneLessons / 7) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = doneLessons + ' / 7 lessons read';
+  }
+ 
+  // --- HOOK PICKER ---
+  const hookData = {
+    story: {
+      emoji: '📖',
+      title: 'Personal Story Hook',
+      desc: 'Start with a real moment from your life. Transport the audience to that scene. Make them feel they are there with you. A story instantly builds emotional connection and trust.',
+      example: '"I was 16 years old, sitting in the back of my father\'s car, when he said something that completely changed how I see the world..."'
+    },
+    fact: {
+      emoji: '📊',
+      title: 'Shocking Fact Hook',
+      desc: 'Open with a number or fact so surprising that the audience sits up in their chair. The fact should be directly connected to your big idea. Make it visual — help them picture the scale.',
+      example: '"Every single day, 800 million people go to bed hungry. That\'s more than twice the population of the entire United States."'
+    },
+    question: {
+      emoji: '❓',
+      title: 'Bold Question Hook',
+      desc: 'Ask the audience a question they have never thought about before. It immediately gets them thinking and creates a puzzle their brain wants to solve. Don\'t answer it right away — make them wait.',
+      example: '"When was the last time you were truly, completely bored — with no phone, no screen, no distraction? And what happened in that silence?"'
+    },
+    statement: {
+      emoji: '⚡',
+      title: 'Bold Statement Hook',
+      desc: 'Make a confident, controversial, or surprising claim in your very first sentence. It challenges assumptions and makes the audience think "Wait — really?" They have to keep listening to find out why.',
+      example: '"Everything we teach children about success is completely wrong — and the research proves it."'
+    }
+  };
+ 
+  function showHook(type, tab) {
+    document.querySelectorAll('.hook-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const d = hookData[type];
+    const prev = document.getElementById('hookPreview');
+    prev.style.opacity = '0';
+    prev.style.transform = 'translateY(8px)';
+    setTimeout(() => {
+      prev.innerHTML = `
+        <h4>${d.emoji} ${d.title}</h4>
+        <p>${d.desc}</p>
+        <div class="hook-example-box">${d.example}</div>
+      `;
+      prev.style.transition = 'opacity 0.3s, transform 0.3s';
+      prev.style.opacity = '1';
+      prev.style.transform = 'translateY(0)';
+    }, 150);
+  }
+ 
+  // --- CHECKLIST & SCORE ---
+  function toggleCheck(item) {
+    item.classList.toggle('checked');
+    updateScore();
+  }
+ 
+  function updateScore() {
+    const checked = document.querySelectorAll('.check-item.checked').length;
+    const total = 10;
+    const pct = (checked / total) * 100;
+    document.getElementById('scoreNum').textContent = checked;
+ 
+    const circle = document.getElementById('scoreCircle');
+    const deg = (pct / 100) * 360;
+    const color = pct < 40 ? '#FF1F1F' : pct < 70 ? '#1A6EFF' : '#3ECF6A';
+    circle.style.background = `conic-gradient(${color} ${deg}deg, #DDD5C0 ${deg}deg)`;
+ 
+    const msgs = {
+      0: "Tick the boxes above to see your readiness score!",
+      1: "Just getting started — keep going! 💪",
+      2: "Early days — you've got work to do.",
+      3: "Some good foundations — keep building!",
+      4: "Getting there — almost halfway!",
+      5: "Solid start — you're halfway ready! 🎯",
+      6: "Great progress — your talk is taking shape!",
+      7: "Strong work — just a few things to refine.",
+      8: "Almost there! Polish those last two items. 🔥",
+      9: "Nearly perfect — one final push!",
+      10: "🏆 YOU ARE READY TO GIVE A KILLER TED TALK! 🎤"
+    };
+    document.getElementById('scoreMsg').textContent = msgs[checked];
+ 
+    if (checked === 10) setTimeout(fireworksEffect, 200);
+  }
+ 
+  // --- CONFETTI ---
+  function fireworksEffect() {
+    const colors = ['#FF1F1F', '#1A6EFF', '#3ECF6A', '#7aadff', '#FF6B9D', '#FFFFFF'];
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement('div');
+      c.classList.add('confetti-piece');
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.width = (Math.random() * 8 + 6) + 'px';
+      c.style.height = (Math.random() * 8 + 6) + 'px';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.animationDelay = Math.random() * 1.5 + 's';
+      c.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4500);
+    }
+  }
+ 
+  // --- CLEAR PLANNER ---
+  function clearPlanner() {
+    if (confirm('Clear all your planning notes?')) {
+      document.querySelectorAll('.planner-section input, .planner-section textarea').forEach(el => el.value = '');
+    }
+  }
+</script>
+</body>
+</html>
+ 
